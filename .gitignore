@@ -10,3 +10,6 @@ dist/
 
 # local scratch
 .assets-tmp/
+
+# editor / agent workspace notes
+.workbuddy/
