@@ -1,0 +1,43 @@
+# Ragdoll Drop Online
+
+> Play Ragdoll Drop online for free in the browser: a physics arcade game in
+> which you launch a floppy ragdoll down fifteen trap-filled levels, score from
+> the impacts it takes on the way and spend the coins on vehicles, props and
+> upgrades. No download, no account, no install.
+
+Ragdoll Drop is developed by Ericetto and listed on Poki. This site is an
+unofficial fan page that embeds a public CDN copy of the Unity WebGL build and
+publishes written guides. It does not host or modify the game files.
+
+## Play
+
+- [Play Ragdoll Drop](https://ragdoll-drop.github.io/) — the game loads in the
+  page. Hold the round button to charge the launch, release to drop, tap the
+  same button mid-run to jump.
+
+## Guides
+
+- [How to Play](https://ragdoll-drop.github.io/how-to-play/) — the objective, how
+  the launch and scoring work, what the shop sells and the mistakes that end a run.
+- [Controls](https://ragdoll-drop.github.io/controls/) — the launch and jump
+  button, the HUD, the shop column, plus a translation of the on-screen labels.
+- [Tips & Tricks](https://ragdoll-drop.github.io/tips/) — reading a level,
+  building chain reactions, choosing a vehicle and earning coins faster.
+- [Unblocked](https://ragdoll-drop.github.io/unblocked/) — running the game on
+  school or work networks, and fixing a player that stays black.
+
+## Site
+
+- [About](https://ragdoll-drop.github.io/about/)
+- [Privacy Policy](https://ragdoll-drop.github.io/privacy/)
+- [Terms of Use](https://ragdoll-drop.github.io/terms/)
+
+## Facts
+
+- Game: Ragdoll Drop, free, browser-based, Unity WebGL, around 10+.
+- Studio: Ericetto. Official listing: Poki.
+- Genres: physics arcade, action, simulation.
+- Levels: fifteen, plus vehicle, prop and ragdoll upgrades bought with coins.
+- Controls: hold to launch, release to drop, tap to jump — mouse or touch.
+- Interface language: the publicly embeddable build ships with Russian menus.
+- Cost: free, no account. Progress is stored in the browser.

@@ -1,0 +1,60 @@
+---
+/**
+ * FaqAccordion — native <details> accordion with optional FAQPage JSON-LD.
+ * No JavaScript involved, so answers are always in the HTML for crawlers.
+ */
+import JsonLd from '../seo/JsonLd.astro';
+
+interface Props {
+  items: { question: string; answer: string }[];
+  title?: string;
+  emitSchema?: boolean;
+  id?: string;
+}
+
+const { items, title, emitSchema = true, id = 'faq' } = Astro.props;
+
+const schema = {
+  '@type': 'FAQPage',
+  mainEntity: items.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+};
+---
+
+<section id={id} class="not-prose mt-14">
+  {emitSchema && <JsonLd schema={schema} />}
+  {title && (
+    <h2 class="font-display text-2xl font-bold tracking-tight text-[var(--text-primary)]">
+      {title}
+    </h2>
+  )}
+  <div class="mt-5 divide-y divide-[var(--border)] overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)]">
+    {items.map((item) => (
+      <details class="group">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-semibold text-[var(--text-primary)] transition-colors hover:bg-[var(--bg-elevated)] [&::-webkit-details-marker]:hidden">
+          <span class="text-[0.95rem] leading-snug">{item.question}</span>
+          <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[var(--border-hover)] text-[var(--text-secondary)] transition-transform duration-200 group-open:rotate-45">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              class="h-3.5 w-3.5"
+              aria-hidden="true"
+            >
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+          </span>
+        </summary>
+        <div class="px-5 pb-5 text-sm leading-relaxed text-[var(--text-secondary)]">
+          {item.answer}
+        </div>
+      </details>
+    ))}
+  </div>
+</section>

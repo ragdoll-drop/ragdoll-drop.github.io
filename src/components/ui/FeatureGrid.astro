@@ -1,0 +1,48 @@
+---
+/**
+ * FeatureGrid — three-column feature cards with inline stroke icons.
+ * Icon names are resolved from a small local map to keep the markup honest
+ * (no icon font, no extra request).
+ */
+interface Props {
+  items: { title: string; text: string; icon: string }[];
+}
+
+const { items } = Astro.props;
+
+const icons: Record<string, string> = {
+  vase: '<circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v3.4M12 17.8v3.4M2.8 12h3.4M17.8 12h3.4M5.5 5.5l2.4 2.4M16.1 16.1l2.4 2.4M18.5 5.5l-2.4 2.4M7.9 16.1l-2.4 2.4"/>',
+  paw: '<circle cx="12" cy="15.2" r="3.1"/><circle cx="6.4" cy="10.6" r="1.9"/><circle cx="17.6" cy="10.6" r="1.9"/><circle cx="9.4" cy="6.2" r="1.9"/><circle cx="14.6" cy="6.2" r="1.9"/>',
+  box: '<path d="M3 8l9-4 9 4-9 4z"/><path d="M3 8v9l9 4 9-4V8"/><path d="M12 12v9"/>',
+  eye: '<path d="M2 12s3.7-6 10-6 10 6 10 6-3.7 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.6"/>',
+  coin: '<ellipse cx="12" cy="6.8" rx="6.8" ry="2.9"/><path d="M5.2 6.8v10.4c0 1.6 3 2.9 6.8 2.9s6.8-1.3 6.8-2.9V6.8"/><path d="M5.2 12c0 1.6 3 2.9 6.8 2.9s6.8-1.3 6.8-2.9"/>',
+  mobile: '<rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M11 18.4h2"/>',
+  stairs: '<path d="M3 21h4.5v-4.5H12V12h4.5V7.5H21V3"/>',
+  cart: '<path d="M2.6 3h2.3l2.5 11.4h10.2L20.6 6H6.2"/><circle cx="9.2" cy="19.6" r="1.5"/><circle cx="16.6" cy="19.6" r="1.5"/>',
+  flag: '<path d="M5 3v18M5 4h11l-2 4 2 4H5"/>',
+};
+
+---
+
+<div class="not-prose mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  {items.map((item) => (
+    <article class="card p-5 transition-colors hover:border-[var(--border-hover)]">
+      <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--color-primary-600)]/15 text-[var(--color-primary-300)]">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="h-5 w-5"
+          aria-hidden="true"
+          set:html={icons[item.icon] ?? icons.flag}
+        />
+      </span>
+      <h3 class="mt-4 text-sm font-semibold text-[var(--text-primary)]">{item.title}</h3>
+      <p class="mt-1.5 text-sm leading-relaxed text-[var(--text-secondary)]">{item.text}</p>
+    </article>
+  ))}
+</div>

@@ -1,0 +1,76 @@
+---
+/**
+ * DataTable — compact reference table (controls, shortcuts).
+ *
+ * The first column is treated as a key list: alternatives separated by "or"/"o"
+ * become separate keycaps, and a letter sequence such as "W A S D" becomes one
+ * keycap per letter.
+ */
+interface Props {
+  head: string[];
+  rows: string[][];
+  caption?: string;
+}
+
+const { head, rows, caption } = Astro.props;
+
+const ALT = /\s+(?:or|o)\s+/;
+
+function keyGroups(cell: string): string[][] {
+  return cell.split(ALT).map((part) => {
+    const trimmed = part.trim();
+    return /^([A-Z0-9] )+[A-Z0-9]$/.test(trimmed) ? trimmed.split(' ') : [trimmed];
+  });
+}
+---
+
+<div
+  class="not-prose mt-6 overflow-x-auto rounded-xl border border-[var(--border)] bg-[var(--bg-secondary)]"
+>
+  <table class="w-full border-collapse text-sm">
+    {caption && <caption class="sr-only">{caption}</caption>}
+    <thead>
+      <tr class="bg-[var(--bg-elevated)]">
+        {head.map((cell) => (
+          <th
+            scope="col"
+            class="px-4 py-2.5 text-left text-xs font-semibold tracking-wide text-[var(--text-primary)] uppercase"
+          >
+            {cell}
+          </th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((row) => (
+        <tr class="border-t border-[var(--border)]">
+          {row.map((cell, index) => (
+            <td
+              class:list={[
+                'px-4 py-2.5 align-middle',
+                index === 0 ? 'whitespace-nowrap' : 'text-[var(--text-secondary)]',
+              ]}
+            >
+              {index === 0 ? (
+                <span class="inline-flex flex-wrap items-center gap-1">
+                  {keyGroups(cell).map((group, gi) => (
+                    <>
+                      {gi > 0 && <span class="px-0.5 text-xs text-[var(--text-tertiary)]">/</span>}
+                      <span class="inline-flex gap-1">
+                        {group.map((key) => (
+                          <kbd class="kbd">{key}</kbd>
+                        ))}
+                      </span>
+                    </>
+                  ))}
+                </span>
+              ) : (
+                cell
+              )}
+            </td>
+          ))}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

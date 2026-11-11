@@ -1,0 +1,62 @@
+---
+/**
+ * Breadcrumbs — accessible trail plus the matching BreadcrumbList JSON-LD.
+ * Items receive already-resolved hrefs (base path included).
+ */
+import JsonLd from './JsonLd.astro';
+import { SITE_ORIGIN } from '../../config/site';
+
+export interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+
+const schema = {
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.label,
+    ...(item.href ? { item: new URL(item.href, SITE_ORIGIN).toString() } : {}),
+  })),
+};
+---
+
+<JsonLd schema={schema} />
+
+<nav aria-label="Breadcrumb">
+  <ol class="flex flex-wrap items-center gap-2 text-xs text-[var(--text-tertiary)]">
+    {items.map((item, index) => (
+      <li class="flex items-center gap-2">
+        {index > 0 && (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            class="h-3 w-3 shrink-0 opacity-50"
+            aria-hidden="true"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        )}
+        {item.href ? (
+          <a href={item.href} class="transition-colors hover:text-[var(--text-primary)]">
+            {item.label}
+          </a>
+        ) : (
+          <span class="font-medium text-[var(--text-secondary)]" aria-current="page">
+            {item.label}
+          </span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>

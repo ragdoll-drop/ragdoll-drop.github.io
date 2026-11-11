@@ -1,0 +1,30 @@
+---
+/**
+ * Steps — numbered step list used for HowTo content. The same data feeds the
+ * HowTo JSON-LD on the page, so the visible copy and the schema never drift.
+ */
+interface Props {
+  steps: { title: string; text: string }[];
+}
+
+const { steps } = Astro.props;
+---
+
+<ol class="not-prose mt-6 space-y-3">
+  {steps.map((step, index) => (
+    <li
+      class="relative flex gap-4 rounded-xl border border-[var(--border)] bg-[var(--bg-secondary)] p-4"
+    >
+      <span
+        class="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[var(--color-primary-600)] text-xs font-bold text-white"
+        aria-hidden="true"
+      >
+        {index + 1}
+      </span>
+      <div>
+        <p class="text-sm font-semibold text-[var(--text-primary)]">{step.title}</p>
+        <p class="mt-1 text-sm leading-relaxed text-[var(--text-secondary)]">{step.text}</p>
+      </div>
+    </li>
+  ))}
+</ol>
