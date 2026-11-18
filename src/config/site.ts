@@ -51,6 +51,9 @@ export const GAME_OFFICIAL_URL = 'https://poki.com/en/g/ragdoll-drop';
 /** Studio page for the developer. */
 export const GAME_DEVELOPER_URL = 'https://poki.com/en/developer/ericetto';
 
+/** Sister site that curates other free browser games. */
+export const MORE_GAMES_URL = 'https://coolgamesspot.com/';
+
 /**
  * Prefix a site-relative path with the deployment base path and normalise the
  * trailing slash so internal links never trigger a GitHub Pages redirect.

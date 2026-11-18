@@ -73,6 +73,7 @@ export const ui = {
       'Ragdoll Drop is developed by Ericetto. This site is an unofficial fan page and is not affiliated with or endorsed by the studio.',
     'footer.official': 'Official listing:',
     'footer.builtWith': 'Built with Astro',
+    'footer.moreGames': 'More games at CoolGamesSpot',
 
     'notFound.title': 'Page not found',
     'notFound.text':

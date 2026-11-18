@@ -3,7 +3,7 @@
  * Footer.astro — site footer with grouped links and the fan-site disclosure
  * that keeps the site honest about who owns the game.
  */
-import { SITE, GAME_OFFICIAL_URL, GAME_DEVELOPER_URL } from '../../config/site';
+import { SITE, GAME_OFFICIAL_URL, GAME_DEVELOPER_URL, MORE_GAMES_URL } from '../../config/site';
 import { getLangFromUrl, useTranslations, localizedHref } from '../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
@@ -126,6 +126,27 @@ const columns = [
       class="mt-12 flex flex-col gap-3 border-t border-[var(--border)] pt-6 text-xs text-[var(--text-tertiary)] sm:flex-row sm:items-center sm:justify-between"
     >
       <p>&copy; {year} {SITE.name}. {t('footer.rights')}</p>
+      <a
+        href={MORE_GAMES_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 font-semibold text-[var(--color-accent-400)] underline decoration-dotted underline-offset-2 transition-colors hover:text-[var(--text-primary)]"
+      >
+        {t('footer.moreGames')}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="h-3.5 w-3.5"
+          aria-hidden="true"
+        >
+          <path d="M7 17 17 7M9 7h8v8" />
+        </svg>
+      </a>
       <p>
         {t('footer.builtWith')} ·
         <a
